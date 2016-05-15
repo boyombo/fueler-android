@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!--meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"-->
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- CSP tag -->
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+     <!-- Using font-awesome library for icons -->
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+         <div class="list-block">
+            <ul>
+                <li id="search">
+                    <div class="item-content">
+                        <div class="item-media"> <i class="icon fa fa-search"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">Search</div>
+                        </div>
+                    </div>
+                </li>
+                <li id="add" >
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon fa fa-plus"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">Add</div>
+                        </div>
+                    </div>
+                </li>
+                <li id="about">
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon fa fa-info-circle"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">About
+<!--                                <a class="close-panel" href="about.html">About</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner" data-page="index">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Fuel Finder</div>
+                    <div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                    </div>
+                </div>
+            </div>
+                <!-- Pages - Fixed navbar and toolbar throughout all pages in this view stack-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, data-page contains page name-->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content-->
+                    <div class="page-content">
+                        <div class="content-block-title">Search for Stations around you</div>
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon fa fa-search"></i></div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input id="term" type="text" placeholder="Enter your area"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link smart-select" data-back-on-select="true">
+                                        <!-- select -->
+                                        <select name="state">
+                                            <option value="abuja">Abuja</option>
+                                            <option value="lagos" selected>Lagos</option>
+                                            <option value="rivers">Rivers</option>
+                                            <option value="kano">Kano</option>
+                                        </select>
+                                        <div class="item-content">
+                                          <div class="item-inner">
+                                            <!-- Select label -->
+                                            <div class="item-title">State</div>
+                                            <!-- Selected value, not required >
+                                            <div class="item-after">Apple</div-->
+                                          </div>
+                                        </div>
+                                      </a>
+                                </li>
+                                
+                            </ul>
+
+                        </div>
+                        <div class="content-block">
+                            <div class="row">
+                                <div class="col-100">
+                                    <input id="btnSearch" type="button" value="Find them" class="button button-big button-fill color-green"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+       
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+                    <!--a href="#" class="link">Link 1</a-->
+                    <!--a href="#" class="link">Link 2</a-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--------------------------->
+    <!--   TEMPLATES SECTION  --->
+    <!--------------------------->
+    <!-- Media List Template  -->
+  
+
+    <script id="listTemplate" type="text/template7">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+                <div class="center sliding">Fuel Station List</div>
+                <div class="right">
+                    <a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Search bar -->
+
+        <div class="page" data-page="list">
+            <form class="searchbar searchbar-init" data-search-list=".list-block-search" data-search-in=".item-after"
+                  data-searchbar-found=".searchbar-found" data-searchbar-not-found=".searchbar-not-found">
+                <div class="searchbar-input">
+                    <input type="search" placeholder="Search">
+                    <a href="#" class="searchbar-clear"></a>
+                </div>
+                <a href="#" class="searchbar-cancel">Cancel</a>
+            </form>
+            <div class="searchbar-overlay"></div>
+            <div class="page-content">
+                <!-- no result -->
+                <div class="content-block searchbar-not-found">
+                    Nothing found
+                </div>
+
+                <div id="mediaList" class="list-block media-list list-block-search searchbar-found">
+                    <ul>
+                        {{#each this}}
+                        <li class="swipeout">
+                            <div class="swipeout-content">
+                                <a href='#' id='mediaItem{{@index}}' data-template='updateTemplate' data-context='{{stringify this}}'
+                                   class="item-content item-link">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">{{name}}</div>
+                                            <div class="item-after">{{timesince}}</div>
+                                        </div>
+                                            <div class="item-subtitle">{{address}}</div>
+                                            <div class="item-text">Vehicles: {{vehicles}}, Price: {{fuel_price}}, Kegs: {{kegs}}</div>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="swipeout-actions-right">
+                                <a href="#" class="bg-orange favorite" data-item="{{@index}}"><i class="icon fa fa-star fa-2x"></i></a>
+                                <a href="#" class="bg-blue share" data-item="{{@index}}"><i class="icon fa fa-share fa-2x"></i></a>
+                            </div>
+                            <div class="swipeout-actions-left">
+                                <a href="#" class="bg-green preview" data-item="{{@index}}"><i class="icon fa fa-play fa-2x"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    
+    <script id="updateTemplate" type="text/template7">
+        <!-- Navbar for this view -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+                <div class="center sliding">Update Station Status</div>
+                <div class="right">
+                    <a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div data-page="update" class="page no-toolbar">
+            <div class="page-content">
+                <div class="content-block-title">Update Status</div>
+                <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">{{name}}</div>
+                                            <div class="item-after">{{address}}</div>
+                                        </div>
+                                            
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link smart-select" data-back-on-select="true">
+                                        <!-- select -->
+                                        <select name="vehicles" id="id_vehicles">
+                                            <option value="0"{{#if veh_0}} selected{{/if}}>1 - 10</option>
+                                            <option value="1"{{#if veh_1}} selected{{/if}}>11 - 20</option>
+                                            <option value="2"{{#if veh_2}} selected{{/if}}>&gt; 20</option>
+                                        </select>
+                                        <div class="item-content">
+                                          <div class="item-inner">
+                                            <!-- Select label -->
+                                            <div class="item-title">Number of Vehicles</div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                </li>
+                                  <li>
+                                    <div class="item-content">
+                                         <div class="item-inner">
+                                            <div class="item-title label">Price</div>
+                                            <div class="item-input">
+                                                <input id="id_price" type="text" value={{fuel_price}} />
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </li>
+                                  <li>
+                                    <div class="item-content">
+                                         <div class="item-inner">
+                                            <div class="item-title label">Sell in Kegs?</div>
+                                           <label class="label-switch">
+                                           <input type="checkbox" id="id_kegs"{{#if kegs_value}} checked{{/if}} />
+                                                <div class="checkbox"></div>
+                                           </label>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="content-block">
+                            <div class="row">
+                                <div class="col-100">
+                                    <input id="btnUpdate" type="button" value="Update {{name}}" class="button button-big button-fill color-green"/>
+                                </div>
+                            </div>
+                        </div>
+
+                <div class="card-footer">
+                    <!--a id="like" href="#" class="item-media link"><i class="icon fa fa-thumbs-up fa-2x"></i> </a>
+                    <a href="#" class="share item-media link"><i class="icon fa fa-external-link fa-2x"></i></a-->
+                </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+     <script id="addTemplate" type="text/template7">
+        <!-- Navbar for this view -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+                <div class="center sliding">Add New Station</div>
+                <div class="right">
+                    <a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div data-page="add" class="page no-toolbar">
+            <div class="page-content">
+                <div class="content-block-title">Update Status</div>
+                <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                         <div class="item-inner">
+                                            <div class="item-title label">Brand</div>
+                                            <div class="item-input">
+                                                <input id="id_brand" type="text" />
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </li>
+                                 <li>
+                                    <a href="#" class="item-link smart-select" data-back-on-select="true">
+                                        <!-- select -->
+                                        <select name="station_state">
+                                            <option value="abuja">Abuja</option>
+                                            <option value="lagos" selected>Lagos</option>
+                                            <option value="rivers">Rivers</option>
+                                            <option value="kano">Kano</option>
+                                        </select>
+                                        <div class="item-content">
+                                          <div class="item-inner">
+                                            <!-- Select label -->
+                                            <div class="item-title">State</div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                </li>
+                                  <li>
+                                    <div class="item-content">
+                                         <div class="item-inner">
+                                            <div class="item-title label">Address</div>
+                                            <div class="item-input">
+                                                <input id="id_address" type="text" />
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </li>
+                                   <li>
+                                    <div class="item-content">
+                                         <div class="item-inner">
+                                            <div class="item-title label">Keywords</div>
+                                            <div class="item-input">
+                                                <input id="id_area" type="text" placeholder="separate with commas" />
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content-block">
+                            <div class="row">
+                                <div class="col-100">
+                                    <input id="btnAdd" type="button" value="Add Station" class="button button-big button-fill color-green"/>
+                                </div>
+                            </div>
+                        </div>
+
+                <div class="card-footer">
+                    <!--a id="like" href="#" class="item-media link"><i class="icon fa fa-thumbs-up fa-2x"></i> </a>
+                    <a href="#" class="share item-media link"><i class="icon fa fa-external-link fa-2x"></i></a-->
+                </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    <script id="aboutTemplate" type="text/template7">
+    <!-- Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="center sliding">About</div>
+                <div class="right">
+                    <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="pages">
+            <div data-page="about" class="page">
+                <div class="page-content">
+                    <div class="content-block">
+                        <p>About FuelFinder!</p>
+                        <p>Fuel finder is a simple application for locating which filling stations have fuel to sell. This is done via crowd-sourcing. Users like you enter the particulars of filling stations that sell fuel around them. This helps others to locate these same stations so they don't have to go around town looking for fuel.
+                        </p>
+                        
+                        <div>Icons made by <a href="http://www.flaticon.com/authors/ocha" title="OCHA">OCHA</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+</body>
+
+</html>
